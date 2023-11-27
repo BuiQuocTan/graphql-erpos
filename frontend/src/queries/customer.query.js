@@ -1,0 +1,124 @@
+import { gql } from "@apollo/client";
+
+const GET_ALLCUSTOMERS_QUERY = gql`
+query getAllCustomers($query:String, $status:String, $limit: Int, $page: Int){
+	getAllCustomers(query:$query, status: $status, count: $limit, page: $page) {
+    allCustomers{
+      id
+      name
+      phone
+      address
+      status
+      created_at
+      updated_at
+      saleInvoice{
+        id
+        date
+        total_amount
+        discount
+        paid_amount
+        due_amount
+        profit
+        customer_id
+        user_id
+        note
+        created_at
+        updated_at
+      }
+      due_amount
+      allReturnSaleInvoice{
+        id
+        date
+        total_amount
+        note
+        saleInvoice_id
+        status
+        created_at
+        updated_at
+      }
+      allTransaction{
+        id
+        date
+        debit_id
+        credit_id
+        particulars
+        amount
+        type
+        related_id
+        status
+        created_at
+        updated_at
+        debit{
+          name
+        }
+        credit{
+          name
+        }
+      }
+    }
+    aggregations{
+      _count{
+        id
+      }
+    }
+  }
+}`;
+
+const GET_ONECUSTOMER_QUERY = gql`
+query getOneCustomer($id: Int){
+	getSingleCustomer(id:$id) {
+    id
+      name
+      phone
+      address
+      status
+      created_at
+      updated_at
+      saleInvoice{
+        id
+        date
+        total_amount
+        discount
+        paid_amount
+        due_amount
+        profit
+        customer_id
+        user_id
+        note
+        created_at
+        updated_at
+      }
+      due_amount
+      allReturnSaleInvoice{
+        id
+        date
+        total_amount
+        note
+        saleInvoice_id
+        status
+        created_at
+        updated_at
+      }
+      allTransaction{
+        id
+        date
+        debit_id
+        credit_id
+        particulars
+        amount
+        type
+        related_id
+        status
+        created_at
+        updated_at
+        debit{
+          name
+        }
+        credit{
+          name
+        }
+      }
+  }
+}`;
+
+export { GET_ALLCUSTOMERS_QUERY, GET_ONECUSTOMER_QUERY, };
